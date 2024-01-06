@@ -1,0 +1,16 @@
+body{
+    background: #545b52fa;
+    padding-top: 10vh;
+}
+
+
+form{
+    background: #fff;
+
+}
+
+
+.form-container{
+    border-radius: 10px;
+    padding: 30px;
+}
