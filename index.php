@@ -48,9 +48,13 @@ echo '
         <!-- <h2></h2> -->
     </div>
     <div>
-    <button onClick="menglogout()" class="btn btn-success my-2 my-sm-0">Log out</button>
+    <button onClick="redirectTiket()" class="btn btn-outline-success my-2 my-sm-0">Tiket</button>
+    </div>
+     <div>
+    <button onClick="menglogout()" class="btn btn-outline-success my-2 my-sm-0">Log out</button>
     </div>
 </div>
+
 
 
 <h2>Halaman Utama</h2>
@@ -62,6 +66,12 @@ echo '
 
 
 ?>
+
+<script>
+    function redirectTiket() {
+        window.location.href = 'tiket.php';
+    }
+</script>
 
 <script>
     function menglogout() {
