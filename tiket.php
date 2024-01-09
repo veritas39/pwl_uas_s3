@@ -1,5 +1,6 @@
 <?php
 require('koneksi.php');
+include('navbar.php');
 
 $error = '';
 $success_message = '';
@@ -91,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </select>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group d-none">
                     <label for="tgl_pemesanan">Tanggal Pemesanan</label>
                     <input type="date" class="form-control" id="tgl_pemesanan" name="tgl_pemesanan">
                 </div>
@@ -125,6 +126,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     document.getElementById('jumlah_tiket').addEventListener('input', calculateTotal);
     calculateTotal();
+
+    document.getElementById('tgl_pemesanan').valueAsDate = new Date();
+
 </script>
 </body>
 </html>

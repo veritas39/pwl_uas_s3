@@ -1,5 +1,6 @@
 <?php
 require('koneksi.php');
+include('navbar.php');
 
 session_start();
 
@@ -8,29 +9,6 @@ if( !isset($_SESSION['username']) ){
     header('Location: login.php');
     $name = isset($_SESSION['name']) ? $_SESSION['name'] : '';
 }
-
-
-// $table_name = 'bryan';
-
-
-// $sql = 'CREATE TABLE IF NOT EXISTS `' . $table_name . '` (
-//     `id_pembeli` INT(10) NOT NULL, 
-//     `nama` VARCHAR(30) NOT NULL,
-//     `alamat` VARCHAR(50) NOT NULL,
-//     `hp` VARCHAR(20) NOT NULL,
-//     `tgl_transaksi` DATE NOT NULL,
-//     `jenis_barang` VARCHAR(25) NOT NULL,
-//     `nama_barang` VARCHAR(50) NOT NULL,
-//     `jumlah` INT(20) NOT NULL,
-//     `harga` INT(25) NOT NULL,
-//     PRIMARY KEY (`id_pembeli`)
-// ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=0';
-
-// $query = mysqli_query($db_conn, $sql);
-
-// if (!$query) {
-//     die('ERROR: Tabel ' . $table_name . ' gagal dibuat: ' . mysqli_error($db_conn));
-// }
 
 
 echo '
@@ -50,7 +28,7 @@ echo '
     <div>
     <button onClick="redirectTiket()" class="btn btn-outline-success my-2 my-sm-0">Tiket</button>
     </div>
-     <div>
+    <div>
     <button onClick="menglogout()" class="btn btn-outline-success my-2 my-sm-0">Log out</button>
     </div>
 </div>
@@ -63,20 +41,16 @@ echo '
 echo '
     </tbody>
 </table>';
-
-
 ?>
-
-<script>
-    function redirectTiket() {
-        window.location.href = 'tiket.php';
-    }
-</script>
 
 <script>
     function menglogout() {
         window.location.href='logout.php';
     }
+
+    // function redirectTiket() {
+    //     window.location.href = 'tiket.php';
+    // }
 </script>
 </body>
 </html>
