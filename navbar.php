@@ -7,7 +7,7 @@
   
 </head>
 <body>
-<nav class="navbar fixed-top navbar-dark bg-dark">
+<nav class="navbar fixed-top navbar-dark bg-dark rounded-lg">
   <a class="navbar-brand" href="index.php">
     <img src="https://cdn.discordapp.com/attachments/1156978982063972412/1194367501342097448/image.png?ex=65b0186a&is=659da36a&hm=f761a2872a32c71f73f06bc3dfc1ed6d6b5c153058acd32a1b593c109c40314c&" width="30" height="30" alt="">
   </a>

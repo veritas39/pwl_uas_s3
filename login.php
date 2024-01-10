@@ -75,7 +75,7 @@ if (isset($_POST['submit'])) {
 </head>
 <body>
 
-<section class="container-fluid mb-4">
+<section class="container-fluid">
     <section class="row justify-content-center">
         <section class="col-12 col-sm-6 col-md-4">
             <form class="form-container" action="login.php" method="POST">
@@ -106,6 +106,7 @@ if (isset($_POST['submit'])) {
         </section>
     </section>
 </section>
+
 
 <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965Dz00rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

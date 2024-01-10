@@ -88,8 +88,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <section class="container-fluid mb-4">
     <section class="row justify-content-center">
-        <section class="col-12 col-sm-8 col-md-6 mx-auto">
-            <h4 class="text-center font-weight-bold mb-4"> Edit Tiket </h4>
+        <section class="col-12 col-sm-8 col-md-6 mx-auto shadow-lg rounded p-3">
+            <h4 class="text-center font-weight-bold mb-3"> Edit Tiket </h4>
 
             <?php if (!empty($message)) : ?>
                 <div class="alert alert-success" role="alert">
@@ -130,7 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
             </form>
 
-            <a href="datatiket.php" class="btn btn-secondary mt-3">Kembali</a>
+            <a href="datatiket.php" class="btn btn-secondary mt-3 mb-1">Kembali</a>
         </section>
     </section>
 </section>

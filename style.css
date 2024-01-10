@@ -1,5 +1,9 @@
 body{
-    background: #545b52fa;
+    /* background: #545b52fa; */
+    background-image: url("./gambar/image3.jpeg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
     padding-top: 10vh;
 }
 
