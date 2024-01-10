@@ -8,7 +8,7 @@
 <body>
 
 <nav class="navbar fixed-top navbar-dark bg-dark">
-  <a class="navbar-brand" href="index.php">
+  <a class="navbar-icon" href="index.php">
     <img src="https://cdn.discordapp.com/attachments/1156978982063972412/1194367501342097448/image.png?ex=65b0186a&is=659da36a&hm=f761a2872a32c71f73f06bc3dfc1ed6d6b5c153058acd32a1b593c109c40314c&" width="30" height="30" alt="">
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false">
@@ -17,10 +17,10 @@
   <div class="navbar-collapse collapse" id="navbarsExample01">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link text-decoration-none text-decoration-underline-on-hover" href="tiket.php">Tiket</a>
+        <a class="nav-link text-decoration-underline-on-hover" href="tiket.php">Tiket</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-decoration-none text-decoration-underline-on-hover" href="#">b</a>
+        <a class="nav-link text-decoration-underline-on-hover" href="logout.php">Logout</a>
       </li>
     </ul>
   </div>

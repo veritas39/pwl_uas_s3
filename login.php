@@ -98,7 +98,7 @@ if (isset($_POST['submit'])) {
                     </div>
                     <input type="text" class="form-control mt-2" id="captcha" name="captcha" placeholder="Masukkan Captcha">
                 </div>
-                <button type="submit" name="submit" class="btn btn-success btn-block">Sign In</button>
+                <button type="submit" name="submit" class="btn btn-primary btn-block">Sign In</button>
                 <div class="form-footer mt-2">
                     <p> Belum punya akun? <a href="register.php">Register</a></p>
                 </div>
