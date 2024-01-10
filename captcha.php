@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-
 if(isset($_GET['image'])) {
     // Generate random string untuk captcha
     $captcha_string = substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"), 0, 6);
@@ -27,8 +26,8 @@ if(isset($_GET['image'])) {
     // Menambahkan captcha string ke gambar
     imagestring($image, 5, 20, 10, $captcha_string, $text_color);
 
-    // Output gambar denga format png
-    imagepng($image, NULL, 0, NULL);
+    // Output gambar dengan format png
+    imagepng($image);
 
     imagedestroy($image);
 
