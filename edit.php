@@ -130,7 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
             </form>
 
-            <a href="datatiket.php" class="btn btn-secondary mt-3">Batal</a>
+            <a href="datatiket.php" class="btn btn-secondary mt-3">Kembali</a>
         </section>
     </section>
 </section>

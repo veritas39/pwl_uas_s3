@@ -14,27 +14,14 @@ if( !isset($_SESSION['username']) ){
 echo '
 <html>
 <head>
-    <title>Latihan SQL</title>
+    <title></title>
     <style>
         body {font-family: tahoma, arial; padding: 20px;}        
     </style>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-<div style="display: flex; justify-content: space-between; align-items: center;">
-    <div>
-        <!-- <h2></h2> -->
-    </div>
-    <div>
-    <button onClick="redirectTiket()" class="btn btn-outline-success my-2 my-sm-0">Tiket</button>
-    </div>
-    <div>
-    <button onClick="menglogout()" class="btn btn-outline-success my-2 my-sm-0">Log out</button>
-    </div>
-</div>
-
-
-
+<br><br>
 <h2>Halaman Utama</h2>
 
     <tbody>';

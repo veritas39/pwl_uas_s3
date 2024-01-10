@@ -1,5 +1,6 @@
 <?php
 require('koneksi.php');
+include('navbar.php');
 
 // Periksa apakah parameter ID tiket telah diberikan
 if (isset($_GET['id'])) {
@@ -56,7 +57,7 @@ if (isset($_GET['id'])) {
     <title>Detail Tiket</title>
 </head>
 <body>
-
+<br>
 <section class="container-fluid mb-4">
     <section class="row justify-content-center">
         <section class="">

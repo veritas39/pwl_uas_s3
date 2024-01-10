@@ -1,5 +1,6 @@
 <?php
 require('koneksi.php');
+include('navbar.php');
 
 // Ambil data tiket dari database
 $sql = 'SELECT * FROM tiket';
@@ -50,7 +51,7 @@ if (mysqli_num_rows($result) > 0) {
     <title>Data Tiket</title>
 </head>
 <body>
-
+<br>
 <section class="container-fluid mb-4">
     <section class="row justify-content-center">
         <section class="">
