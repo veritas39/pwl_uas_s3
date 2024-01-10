@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             <?php endif; ?>
 
-            <form method="post" action="edit.php?id=<?= $tiket_id; ?>">
+            <form class="form-container" method="post" action="edit.php?id=<?= $tiket_id; ?>">
                 <div class="form-group">
                     <label for="nama">Nama:</label>
                     <input type="text" class="form-control" id="nama" name="nama" value="<?= $tiket_data['nama']; ?>" required>
