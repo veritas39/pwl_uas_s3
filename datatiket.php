@@ -61,7 +61,7 @@ if (mysqli_num_rows($result) > 0) {
                 <div class="alert alert-info" role="alert"><?= $no_data_message; ?></div>
             <?php } else { ?>
             
-                <table class="table">
+                <table class="table rounded">
     <thead>
         <tr>
             <th>ID</th>
