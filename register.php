@@ -53,7 +53,7 @@ if( isset($_POST['submit']) ){
                 $pass = password_hash($password, PASSWORD_DEFAULT);
 
                 //insert data ke database
-                $query = "INSERT INTO users (username, name, email, password ) VALUES ('$username', '$name', '$email', '$pass')";
+                $query = "INSERT INTO users (username, name, email, password, privilege ) VALUES ('$username', '$name', '$email', '$pass', 'visitor')";
                 $result = mysqli_query($db_conn, $query);
 
                 //jika insert data berhasil maka akan diredirect ke halaman index.php serta menyimpan data username ke session

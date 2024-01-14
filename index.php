@@ -8,10 +8,11 @@ if( !isset($_SESSION['username']) ){
     $_SESSION['msg'] = 'anda harus login untuk mengakses halaman ini';
     header('Location: login.php');
     $name = isset($_SESSION['name']) ? $_SESSION['name'] : '';
+} else {
+    $username = $_SESSION['username'];
 }
+?>
 
-
-echo '
 <html>
 <head>
     <title></title>
@@ -30,7 +31,7 @@ echo '
             </div>
             <div class="col-md-6 display-5">
                 <!-- Isi kolom kedua di sini -->
-                <h1>Welcome, <?php echo $_SESSION["$username"]; ?></h1>
+                <h1>Halo, <?php echo $username; ?></h1>
                 <h1>Selamat Datang di Sistem Informasi Kebun Binatang Indonesia</h1>
                 <p>Temukan berbagai kabar terbaru kami disini</p>
                 <button type="button" onclick="redirectToPage()" class="btn btn-l mr-5 btn-outline-primary btn-lg btn-block">Rencanakan Kunjungan Anda</button></a>
@@ -49,20 +50,18 @@ echo '
             </div>
         </div>
     </div>
-    <tbody>';
-echo '
+    <tbody>
     </tbody>
-</table>';
-?>
+</table>
 
 <script>
     function menglogout() {
         window.location.href='logout.php';
     }
 
-    // function redirectTiket() {
-    //     window.location.href = 'tiket.php';
-    // }
+    function redirectToPage() {
+        window.location.href = 'tiket.php';
+    }
 </script>
 </body>
 </html>

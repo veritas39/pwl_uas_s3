@@ -40,13 +40,16 @@ if (isset($_POST['submit'])) {
         $rows   = mysqli_num_rows($result);
 
         if ($rows != 0) {
-            $hash = mysqli_fetch_assoc($result)['password'];
+            // $hash = mysqli_fetch_assoc($result)['password'];
+            $user = mysqli_fetch_assoc($result); //a
+            $hash = $user['password']; //a
             if (password_verify($password, $hash)) {
                 $entered_captcha = $_POST['captcha'];
                 $captcha_from_session = $_SESSION['captcha_string'];
 
                 if ($entered_captcha == $captcha_from_session) {
                     $_SESSION['username'] = $username;
+                    $_SESSION['privilege'] = $user['privilege']; //b
                     header('Location: index.php');
                 } else {
                     $error = 'Captcha salah cuy';
@@ -78,7 +81,7 @@ if (isset($_POST['submit'])) {
 <section class="container-fluid">
     <section class="row justify-content-center">
         <section class="col-12 col-sm-6 col-md-4">
-            <form class="form-container" action="login.php" method="POST">
+            <form class="form-container shadow-lg" action="login.php" method="POST">
                 <h4 class="text-center font-weight-bold"> Sign-In </h4>
                 <?php if ($error != '') { ?>
                     <div class="alert alert-danger" role="alert"> <?= $error; ?></div>

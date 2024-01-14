@@ -17,7 +17,7 @@
   <div class="navbar-collapse collapse" id="navbarsExample01">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item mt-3">
-        <a class="text-light text-decoration-underline-on-hover" href="tiket.php">Tiket</a>
+        <a class="text-light text-decoration-underline-on-hover" href="tiket.php">Pesan Tiket</a>
       </li>
       <li class="nav-item mt-3">
         <a class="text-light text-decoration-underline-on-hover" href="datatiket.php">Data Tiket</a>

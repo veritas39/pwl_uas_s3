@@ -139,16 +139,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/18WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ60W/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
-<!-- <script>
-    function updateTotalHarga() {
-        var jumlahTiket = document.getElementById('jumlah_tiket').value;
-        var hargaPerTiket = 25000;
-        var totalHarga = jumlahTiket * hargaPerTiket;
-
-        document.getElementById('total_harga').value = totalHarga;
-    }
-</script> -->
-
 <script>
     var jumlahTiketInput = document.getElementById('jumlah_tiket');
     var totalHargaInput = document.getElementById('total_harga');
