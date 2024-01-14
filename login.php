@@ -73,8 +73,8 @@ if (isset($_POST['submit'])) {
 
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
 
+<body>
 <section class="container-fluid">
     <section class="row justify-content-center">
         <section class="col-12 col-sm-6 col-md-4">
@@ -108,7 +108,7 @@ if (isset($_POST['submit'])) {
 </section>
 
 
-<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965Dz00rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
@@ -116,6 +116,6 @@ if (isset($_POST['submit'])) {
         crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ60W/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script> -->
+        crossorigin="anonymous"></script>
 </body>
 </html>
