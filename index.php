@@ -12,42 +12,101 @@ if( !isset($_SESSION['username']) ){
 
 
 echo '
+
 <html>
 <head>
-    <title></title>
+    <title>Latihan SQL</title>
     <style>
-        body {font-family: tahoma, arial; padding: 20px;}        
+        body {
+            font-family: tahoma, arial;
+            padding: 0px;
+            margin: 0px;
+        }
+        .col-md-6 {
+            margin: 0;
+        }
+         .row {
+            margin: 0;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+        }
+
+        .logout-btn {
+            margin-left: auto; /* Ini akan membuat tombol logout berada di sebelah kanan */
+        }
+        
     </style>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body class="p-0 mx-0">
- <div class="container">
-    <br><br><br><br>
-        <div class="row">
-            <div class="col-md-6">
-                <!-- Isi kolom pertama di sini -->
-                <img src="./gambar/image2.jpeg" class="img-fluid float-start mx-auto rounded-lg">
-            </div>
-            <div class="col-md-6 display-5">
-                <!-- Isi kolom kedua di sini -->
-                <h1>Welcome, <?php echo $_SESSION["$username"]; ?></h1>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    </head>
+<body class="p-0 mx-0 ">
+    <!--<nav class="p-4 d-flex  flex-row-reverse">
+    <button onClick="menglogout()" class="btn btn-danger my-2 my-sm-0 logout-btn">Log out</button>    
+    <a href="#" class="mx-3"><button type="button" class="btn btn-light mr-5" onClick="profilebutton()">Profile</button></a>
+    <a href="#" class="mx-3"><button type="button" class="btn btn-light mr-5">Event</button></a>
+    <a href="#" class="mx-3"><button type="button" class="btn btn-light mr-5">Flora</button></a>
+    <a href="#" class="mx-3"><button type="button" class="btn btn-light mr-5">Satwa</button></a>
+        <a href="#" class="mx-3"><button type="button" class="btn btn-light mr-5">Home</button></a>
+    </nav>-->
+    <div class="row p-5">
+        <div class="col-sm-6 py-4">
+        <img src="images/2.jpg" class="img-fluid float-start mx-auto rounded-lg">
+        </div>
+        <div class="col-sm-6 py-5 px-5 ">
+            <h1>Welcome, <?php echo $_SESSION["$username"]; ?></h1>
                 <h1>Selamat Datang di Sistem Informasi Kebun Binatang Indonesia</h1>
                 <p>Temukan berbagai kabar terbaru kami disini</p>
                 <button type="button" onclick="redirectToPage()" class="btn btn-l mr-5 btn-outline-primary btn-lg btn-block">Rencanakan Kunjungan Anda</button></a>
-            </div>
+
         </div>
     </div>
-    <div class="container bg-dark my-5 rounded-lg">
-        <div class="row my-3">
-            <div class="col-md-6 m-lg-3 text-light">
-                <h1 class="display-4">Ragam Satwa</h1>
-                <p class="display-5">Lorem ipsum sit dolor amet Lorem ipsum sit dolor amet 
+    <div class="px-4">
+    <div class="row  px-4">
+        <div class="col-sm-6 bg-primary bg-opacity-50 text-dark p-5 text-center">
+            <h1 class="display-4 py-5">Ragam Satwa</h1>
+                <p>Lorem ipsum sit dolor amet Lorem ipsum sit dolor amet 
                 Lorem ipsum sit dolor amet Lorem ipsum sit dolor amet</p>
-            </div>
-            <div class="col-md-12">
-            <img src="./gambar/image1.jpeg" class="img-fluid float-start mx-auto mb-3 rounded-lg">
-            </div>
+
+                <button type="button" class="btn btn-outline-primary m-2">Animalia</button>
+                <button type="button" class="btn btn-outline-primary m-2">Chordata</button>
+                <button type="button" class="btn btn-outline-primary m-2">Vertebrata</button>
+                <button type="button" class="btn btn-outline-primary m-2">Aves</button>
+                <button type="button" class="btn btn-outline-primary m-2">Psittaciformes</button>
+                <button type="button" class="btn btn-outline-primary m-2">Cacatuidae</button>
+                <button type="button" class="btn btn-outline-primary m-2">Cacatua</button>
+                <button type="button" class="btn btn-outline-primary m-2">Cacatua Sulphurea</button>
+
+                </div>
+        <div class="col-sm-6 bg-dark text-white">
+            <img src="images/1.jpg" class="img-fluid p-5">
         </div>
+    </div>       
+    <div class="row px-4">
+        <div class="col-sm-6 bg-dark text-white">
+            <img src="images/flower.jpg" class="img-fluid p-5">
+        </div>
+    <div class="col-sm-6 bg-success bg-opacity-50 text-dark p-5 text-center">
+        <h1 class="display-4 py-5">Ragam Satwa</h1>
+            <p>Lorem ipsum sit dolor amet Lorem ipsum sit dolor amet 
+            Lorem ipsum sit dolor amet Lorem ipsum sit dolor amet</p>
+
+            <button type="button" class="btn btn-outline-success m-2">Plantae</button>
+            <button type="button" class="btn btn-outline-success m-2">Magnoliophyta</button>
+            <button type="button" class="btn btn-outline-success m-2">Magnoliopsida</button>
+            <button type="button" class="btn btn-outline-success m-2">Lamiales</button>
+            <button type="button" class="btn btn-outline-success m-2">Scrophulariaceae</button>
+            <button type="button" class="btn btn-outline-success m-2">Buddleja</button>
+            <button type="button" class="btn btn-outline-success m-2">Budleja Davidi</button>
+
+    </div>
+    </div>
     </div>
     <tbody>';
 echo '
@@ -59,7 +118,9 @@ echo '
     function menglogout() {
         window.location.href='logout.php';
     }
-
+    function redirectToPage() {
+        window.location.href ='tiket.php';
+    }
     // function redirectTiket() {
     //     window.location.href = 'tiket.php';
     // }
