@@ -33,6 +33,10 @@
         <li class="nav-item mt-3">
           <a class="text-light text-decoration-underline-on-hover link-offset-2 link-underline link-underline-opacity-0" href="event.php">Event</a>
         </li>
+        <li class="nav-item mt-3">
+          <a class="text-light text-decoration-underline-on-hover link-offset-2 link-underline link-underline-opacity-0" href="printtiket.php">Print Tiket</a>
+        </li>
+
         <li class="nav-item mt-3 mb-2">
           <a class="text-light text-decoration-underline-on-hover link-offset-2 link-underline link-underline-opacity-0" href="logout.php">Logout</a>
         </li>

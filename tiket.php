@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 
 <section class="container-fluid mb-4">
-    <section class="row justify-content-center">
+    <section class="row justify-content-center ">
         <section class="col-12 col-sm-6 col-md-4">
             <form class="form-container" action="tiket.php" method="POST">
                 <h4 class="text-center font-weight-bold"> Form Tiket </h4>
