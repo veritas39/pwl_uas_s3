@@ -53,7 +53,7 @@ if( isset($_POST['submit']) ){
                 $pass = password_hash($password, PASSWORD_DEFAULT);
 
                 //insert data ke database
-                $query = "INSERT INTO users (username, name, email, password ) VALUES ('$username', '$name', '$email', '$pass')";
+                $query = "INSERT INTO users (username, name, email, password, privilege ) VALUES ('$username', '$name', '$email', '$pass', 'visitor')";
                 $result = mysqli_query($db_conn, $query);
 
                 //jika insert data berhasil maka akan diredirect ke halaman index.php serta menyimpan data username ke session
@@ -79,11 +79,20 @@ if( isset($_POST['submit']) ){
         if( $result = mysqli_query($db_conn, $query) ) return mysqli_num_rows($result);
     }
 ?>
-        <section class="container-fluid mb-4">
-            <!-- justify-content-center untuk mengatur posisi form agar berada di tengah-tengah -->
-            <section class="row justify-content-center">
-            <section class="col-12 col-sm-6 col-md-4">
-                <form class="form-container" action="register.php" method="POST">
+       <section class="mx-auto" style="background-color: #1e83a1;">
+  <div class="container py-3 h-100">
+    <div class="row d-flex justify-content-center align-items-center">
+      <div class="mx-auto">
+        <div class="card" style="border-radius: 1rem;" >
+          <div class="row g-0">
+            <div class="col-md-6 col-lg-5 d-none d-md-block">
+              <img src="./gambar/jerapah2.jpeg"
+                alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+            </div>
+            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+              <div class="card-body p-4 p-lg-5 text-black">
+
+              <form class="form-container" action="register.php" method="POST">
                 <h4 class="text-center font-weight-bold"> Sign-Up </h4>
                 <?php if($error != ''){ ?>
                 <div class="alert alert-danger" role="alert"><?= $error; ?></div>
@@ -124,9 +133,15 @@ if( isset($_POST['submit']) ){
                         <p> Sudah punya akun? <a href="login.php">Login</a></p>
                     </div>
                 </form>
-            </section>
-            </section>
-        </section>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
     
     <!-- Bootstrap requirement jQuery pada posisi pertama, kemudian Popper.js, dan yang terakhit Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965Dz00rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

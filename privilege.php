@@ -68,11 +68,6 @@ if (mysqli_num_rows($result) > 0) {
         <section class="">
             <h4 class="text-center font-weight-bold mb-4"> Data Tiket </h4>
 
-            <form action="datatiket.php" method="get">
-        <input type="text" name="cari" placeholder="Cari Nama & Id">
-        <input type="submit" value="Cari">
-    </form><br>
-
             <?php if ($no_data_message != '') { ?>
                 <div class="alert alert-info" role="alert"><?= $no_data_message; ?></div>
             <?php } else { ?>
@@ -90,29 +85,7 @@ if (mysqli_num_rows($result) > 0) {
                         </tr>
                     </thead>
                     <tbody>
-                        <?php 
-                        
-                        if (!$result) {
-                            die("Query failed: " . mysqli_error($db_conn));
-                        }
-                        $per_halaman = 7;
-                        $halaman = isset($_GET['halaman']) ? (int)$_GET['halaman'] : 1;
-                        $mulai = ($halaman - 1) * $per_halaman;
-                        $cari = isset($_GET['cari']) ? $_GET['cari'] : '';
-                
-                        $query = "SELECT id, nama, email, jumlah_tiket, tgl_pemesanan, tgl_kedatangan, total_harga
-                        FROM tiket
-                        WHERE nama LIKE '%$cari%' OR id = '$cari'
-                        LIMIT $mulai, $per_halaman";
-                
-                
-                        $result = mysqli_query($db_conn, $query);
-                
-                        if (!$result) {
-                            die("Query failed: " . mysqli_error($koneksi));
-                        }
-                        
-                        foreach ($tiket_data as $tiket) { ?>
+                        <?php foreach ($tiket_data as $tiket) { ?>
                             <tr>
                                 <td><?= $tiket['id']; ?></td>
                                 <td><?= $tiket['nama']; ?></td>
@@ -136,25 +109,7 @@ if (mysqli_num_rows($result) > 0) {
                     </tbody>
                 </table>
                 <a href="index.php" class="btn btn-primary">Kembali</a>
-            <?php 
-         $query_jumlah = "SELECT COUNT(*) AS total_tiket FROM tiket WHERE nama LIKE '%$cari%' OR id = '$cari'";
-         $result_jumlah = mysqli_query($db_conn, $query_jumlah);
-         
-         if (!$result_jumlah) {
-             die("Query failed: " . mysqli_error($db_conn));
-         }
-         
-         $row_jumlah = mysqli_fetch_assoc($result_jumlah);
-         $total_tiket = $row_jumlah['total_tiket'];
-         $total_halaman = ceil($total_tiket / $per_halaman);
-         
-         echo "Total: " . $total_tiket;
-         
-         echo "<ul class='pagination'>";
-         for ($i = 1; $i <= $total_halaman; $i++) {
-             echo "<li><a href='datatiket.php?halaman=$i'>$i</a></li>";
-         }
-         echo "</ul>";} ?>
+            <?php } ?>
         </section>
     </section>
 </section>

@@ -40,13 +40,16 @@ if (isset($_POST['submit'])) {
         $rows   = mysqli_num_rows($result);
 
         if ($rows != 0) {
-            $hash = mysqli_fetch_assoc($result)['password'];
+            // $hash = mysqli_fetch_assoc($result)['password'];
+            $user = mysqli_fetch_assoc($result); //a
+            $hash = $user['password']; //a
             if (password_verify($password, $hash)) {
                 $entered_captcha = $_POST['captcha'];
                 $captcha_from_session = $_SESSION['captcha_string'];
 
                 if ($entered_captcha == $captcha_from_session) {
                     $_SESSION['username'] = $username;
+                    $_SESSION['privilege'] = $user['privilege']; //b
                     header('Location: index.php');
                 } else {
                     $error = 'Captcha salah cuy';
@@ -75,10 +78,20 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
-<section class="container-fluid">
-    <section class="row justify-content-center">
-        <section class="col-12 col-sm-6 col-md-4">
-            <form class="form-container" action="login.php" method="POST">
+<section class="vh-100" style="background-color: #757c88;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-10">
+        <div class="card" style="border-radius: 1rem;" >
+          <div class="row g-0">
+            <div class="col-md-6 col-lg-5 d-none d-md-block">
+              <img src="./gambar/jerapah.jpeg"
+                alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+            </div>
+            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+              <div class="card-body p-4 p-lg-5 text-black">
+
+              <form class="form-container"  action="login.php" method="POST">
                 <h4 class="text-center font-weight-bold"> Sign-In </h4>
                 <?php if ($error != '') { ?>
                     <div class="alert alert-danger" role="alert"> <?= $error; ?></div>
@@ -103,8 +116,14 @@ if (isset($_POST['submit'])) {
                     <p> Belum punya akun? <a href="register.php">Register</a></p>
                 </div>
             </form>
-        </section>
-    </section>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 
