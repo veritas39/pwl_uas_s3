@@ -22,6 +22,9 @@
       <li class="nav-item mt-3">
         <a class="text-light text-decoration-underline-on-hover" href="datatiket.php">Data Tiket</a>
       </li>
+      <li class="nav-item mt-3">
+        <a class="text-light text-decoration-underline-on-hover" href="datahewan.php">Data Hewan</a>
+      </li>
       <li class="nav-item mt-3 mb-2">
         <a class="text-light text-decoration-underline-on-hover" href="logout.php">Logout</a>
       </li>

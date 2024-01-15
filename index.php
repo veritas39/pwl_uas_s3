@@ -21,13 +21,13 @@ if( !isset($_SESSION['username']) ){
     </style>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
-<body class="p-0 mx-0">
+<body class="bg-secondary">
  <div class="container">
     <br><br><br><br>
         <div class="row">
             <div class="col-md-6">
                 <!-- Isi kolom pertama di sini -->
-                <img src="./gambar/image2.jpeg" class="img-fluid float-start mx-auto rounded-lg">
+                <img src="./gambar/imagee3.jpeg" class="img-fluid float-start mx-auto rounded-lg">
             </div>
             <div class="col-md-6 display-5">
                 <!-- Isi kolom kedua di sini -->
@@ -45,9 +45,41 @@ if( !isset($_SESSION['username']) ){
                 <p class="display-5">Lorem ipsum sit dolor amet Lorem ipsum sit dolor amet 
                 Lorem ipsum sit dolor amet Lorem ipsum sit dolor amet</p>
             </div>
-            <div class="col-md-12">
-            <img src="./gambar/image1.jpeg" class="img-fluid float-start mx-auto mb-3 rounded-lg">
-            </div>
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img class="d-block w-100" src="./gambar/image2.jpeg" alt="First slide">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="./gambar/imagee1.jpg" alt="Second slide">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="./gambar/imagee4.jpeg" alt="Third slide">
+      </div>
+      <div class="carousel-item">
+      <img class="d-block w-100" src="./gambar/image5.jpg" alt="Four slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="./gambar/image6.jpg" alt="Five slide">
+    </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+  </div>
         </div>
     </div>
     <tbody>
