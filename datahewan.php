@@ -2,7 +2,7 @@
 require('koneksi.php');
 
 // Ambil data tiket dari database
-$sql = 'SELECT * FROM tiket';
+$sql = 'SELECT * FROM hewan';
 $result = mysqli_query($db_conn, $sql);
 
 // Inisialisasi variabel untuk menampilkan pesan jika tidak ada data
@@ -11,7 +11,7 @@ $no_data_message = '';
 // Cek apakah ada data tiket
 if (mysqli_num_rows($result) > 0) {
     // Data tiket ditemukan
-    $tiket_data = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    $hewan_data = mysqli_fetch_all($result, MYSQLI_ASSOC);
 } else {
     // Tidak ada data tiket
     $no_data_message = 'Belum ada data tiket yang dimasukkan.';
@@ -46,17 +46,20 @@ if (mysqli_num_rows($result) > 0) {
         .alert {
             margin-top: 20px;
         }
+
+        .a {
+            text-align: center;
+        }
     </style>
     <title>Data Tiket</title>
 </head>
-<body >
-
+<body>
 <section class="container-fluid mb-4">
     <section class="row justify-content-center">
         <section class="">
-            <h4 class="text-center font-weight-bold mb-4"> Data Tiket </h4>
+            <h4 class="text-center font-weight-bold mb-4"> Data Hewan </h4>
 
-            <form action="datatiket.php" method="get">
+            <form action="datahewan.php" method="get">
         <input type="text" name="cari" placeholder="Cari Nama & Id">
         <input type="submit" value="Cari">
     </form><br>
@@ -70,16 +73,17 @@ if (mysqli_num_rows($result) > 0) {
         <tr>
             <th>ID</th>
             <th>Nama</th>
-            <th>Email</th>
-            <th>Jumlah Tiket</th>
-            <th>Tanggal Pemesanan</th>
-            <th>Tanggal Kedatangan</th>
-            <th>Total Harga</th>
-            <th>Aksi</th>
+            <!-- <th>Email</th> -->
+            <th>jenis</th>
+            <th>spesies</th>
+            <th>warna</th>
+            <th>umur</th>
+            <th>opsi</th>
+            
         </tr>
     </thead>
     <tbody>
-        <?php 
+        <?php
         
         if (!$result) {
             die("Query failed: " . mysqli_error($db_conn));
@@ -89,9 +93,9 @@ if (mysqli_num_rows($result) > 0) {
         $mulai = ($halaman - 1) * $per_halaman;
         $cari = isset($_GET['cari']) ? $_GET['cari'] : '';
 
-        $query = "SELECT id, nama, email, jumlah_tiket, tgl_pemesanan, tgl_kedatangan, total_harga
-        FROM tiket
-        WHERE nama LIKE '%$cari%' OR id = '$cari'
+        $query = "SELECT id, nama, jenis, spesies, warna, umur
+        FROM hewan
+        WHERE Nama LIKE '%$cari%' OR id = '$cari'
         LIMIT $mulai, $per_halaman";
 
 
@@ -101,50 +105,54 @@ if (mysqli_num_rows($result) > 0) {
             die("Query failed: " . mysqli_error($koneksi));
         }
         
-        foreach ($tiket_data as $tiket) { ?>
+        foreach ($result as $hewan) { ?>
             <tr>
-                <td><?= $tiket['id']; ?></td>
-                <td><?= $tiket['nama']; ?></td>
-                <td><?= $tiket['email']; ?></td> 
-                <td><?= $tiket['jumlah_tiket']; ?></td>
-                <td><?= $tiket['tgl_pemesanan']; ?></td>
-                <td><?= $tiket['tgl_kedatangan']; ?></td>
-                <td><?= $tiket['total_harga']; ?></td>
+                <td><?= $hewan['id']; ?></td>
+                <td><?= $hewan['nama']; ?></td>
+                <td><?= $hewan['jenis']; ?></td>
+                <td><?= $hewan['spesies']; ?></td>
+                <td><?= $hewan['warna']; ?></td>
+                <td><?= $hewan['umur']; ?></td>
                 <td>
                     <!-- Tombol/Tautan Detail -->
-                    <a href="detail.php?id=<?= $tiket['id']; ?>" class="btn btn-info btn-sm">Detail</a>
+                    <a href="detailhewan.php?id=<?= $hewan['id']; ?>" class="btn btn-info btn-sm">Detail</a>
                     
                     <!-- Tombol/Tautan Edit -->
-                    <a href="edit.php?id=<?= $tiket['id']; ?>" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="edithewan.php?id=<?= $hewan['id']; ?>" class="btn btn-warning btn-sm">Edit</a>
                     
                     <!-- Tombol/Tautan Hapus -->
-                    <a href="hapus.php?id=<?= $tiket['id']; ?>" class="btn btn-danger btn-sm">Hapus</a>
+                    <a href="hapushewan.php?id=<?= $hewan['id']; ?>" class="btn btn-danger btn-sm">Hapus</a>
                 </td>
             </tr>
-        <?php } ?>
+            
+        <?php 
+    } ?>
     </tbody>
+    
 </table>
-<a href="index.php" class="btn btn-primary">Kembali</a><br>
+
+<a href="index.php" class="btn btn-primary">Kembali</a> <a href="hewan.php" class="btn btn-primary">Tambah hewan</a><br><br>
             <?php 
-        $query_jumlah = "SELECT COUNT(*) AS total_tiket FROM tiket WHERE nama LIKE '%$cari%' OR id = '$cari'";
-        $result_jumlah = mysqli_query($db_conn, $query_jumlah);
-        
-        if (!$result_jumlah) {
-            die("Query failed: " . mysqli_error($db_conn));
-        }
-        
-        $row_jumlah = mysqli_fetch_assoc($result_jumlah);
-        $total_tiket = $row_jumlah['total_tiket'];
-        $total_halaman = ceil($total_tiket / $per_halaman);
-        
-        echo "Total: " . $total_tiket;
-        
-        echo "<ul class='pagination'>";
-        for ($i = 1; $i <= $total_halaman; $i++) {
-            echo "<li><a href='datatiket.php?halaman=$i'>$i</a></li>";
-        }
-        echo "</ul>";} ?>
+$query_jumlah = "SELECT COUNT(*) AS total_hewan FROM hewan WHERE Nama LIKE '%$cari%' OR id = '$cari'";
+$result_jumlah = mysqli_query($db_conn, $query_jumlah);
+
+if (!$result_jumlah) {
+    die("Query failed: " . mysqli_error($db_conn));
+}
+
+$row_jumlah = mysqli_fetch_assoc($result_jumlah);
+$total_hewan = $row_jumlah['total_hewan'];
+$total_halaman = ceil($total_hewan / $per_halaman);
+
+echo "Total: " . $total_hewan;
+
+echo "<ul class='pagination'>";
+for ($i = 1; $i <= $total_halaman; $i++) {
+    echo "<li><a href='datahewan.php?halaman=$i'>$i</a></li>";
+}
+echo "</ul>";} ?>
         </section>
+        
     </section>
 </section>
 

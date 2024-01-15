@@ -1,6 +1,5 @@
 <?php
 require('koneksi.php');
-include('navbar.php');
 
 $error = '';
 $success_message = '';
@@ -52,13 +51,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css"><br><br><br>
     <title>Form Tiket</title>
 </head>
-<body>
+<body style="background-color: gray; color: black; font-family: 'Helvetica Neue', sans-serif; margin: 0; padding: 0; height: 100vh; overflow: hidden;">
 
 <section class="container-fluid mb-4">
-    <section class="row justify-content-center ">
+    <section class="row justify-content-center">
         <section class="col-12 col-sm-6 col-md-4">
             <form class="form-container" action="tiket.php" method="POST">
                 <h4 class="text-center font-weight-bold"> Form Tiket </h4>
@@ -107,7 +106,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input type="text" class="form-control" id="total_harga" name="total_harga" readonly>
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                <button type="submit" class="btn btn-primary btn-block">Submit</button> <br>
+                <a href="index.php" class="btn btn-primary">Kembali</a>
             </form>
         </section>
     </section>

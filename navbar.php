@@ -28,6 +28,9 @@
           <a class="text-light text-decoration-underline-on-hover link-offset-2 link-underline link-underline-opacity-0" href="datatiket.php">Data Tiket</a>
         </li>
         <li class="nav-item mt-3">
+          <a class="text-light text-decoration-underline-on-hover link-offset-2 link-underline link-underline-opacity-0" href="datahewan.php">Data Hewan</a>
+        </li>
+        <li class="nav-item mt-3">
           <a class="text-light text-decoration-underline-on-hover link-offset-2 link-underline link-underline-opacity-0" href="satwa.php">Satwa</a>
         </li>
         <li class="nav-item mt-3">
