@@ -10,6 +10,7 @@ $sql = 'CREATE TABLE IF NOT EXISTS `' . $table_name . '` (
     `username` VARCHAR(50) NOT NULL,
     `email` VARCHAR(50) NOT NULL,
     `password` VARCHAR(255) NOT NULL,
+    `privilege` VARCHAR(10) NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=0';
 
@@ -40,13 +41,16 @@ if (isset($_POST['submit'])) {
         $rows   = mysqli_num_rows($result);
 
         if ($rows != 0) {
-            $hash = mysqli_fetch_assoc($result)['password'];
+            // $hash = mysqli_fetch_assoc($result)['password'];
+            $user = mysqli_fetch_assoc($result); //a
+            $hash = $user['password']; //a
             if (password_verify($password, $hash)) {
                 $entered_captcha = $_POST['captcha'];
                 $captcha_from_session = $_SESSION['captcha_string'];
 
                 if ($entered_captcha == $captcha_from_session) {
                     $_SESSION['username'] = $username;
+                    $_SESSION['privilege'] = $user['privilege']; //b
                     header('Location: index.php');
                 } else {
                     $error = 'Captcha salah cuy';
