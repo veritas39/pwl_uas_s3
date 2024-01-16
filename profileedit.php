@@ -19,6 +19,22 @@ if (!$result) {
 }
 
 $userData = mysqli_fetch_assoc($result);
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $name = mysqli_real_escape_string($db_conn, $_POST['name']);
+    $email = mysqli_real_escape_string($db_conn, $_POST['email']);
+
+    $updateQuery = "UPDATE users SET name='$name', email='$email' WHERE username='$username'";
+    $updateResult = mysqli_query($db_conn, $updateQuery);
+
+    if (!$updateResult) {
+        die('ERROR: ' . mysqli_error($db_conn));
+    }
+
+    // Redirect to profile page after successful update
+    header('Location: profileedit.php');
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +51,6 @@ $userData = mysqli_fetch_assoc($result);
     <style>
         body {
             background: white;
-
         }
 
         .form-control:focus {
@@ -68,7 +83,7 @@ $userData = mysqli_fetch_assoc($result);
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h4 class="text-right">Edit Profile</h4>
                     </div>
-                    <form action="updateprofile.php" method="POST">
+                    <form action="profileedit.php" method="POST">
                         <div class="row mt-2">
                             <div class="col-md-6">
                                 <label class="labels">Name</label><br>
@@ -76,7 +91,7 @@ $userData = mysqli_fetch_assoc($result);
                             </div>
                             <div class="col-md-6">
                                 <label class="labels">Username</label><br>
-                                <input type="text" class="form-control" name="username" value="<?php echo $userData['username']; ?>">
+                                <input type="text" class="form-control" name="username" value="<?php echo $userData['username']; ?>" readonly>
                             </div>
                         </div>
                         <div class="row mt-3">

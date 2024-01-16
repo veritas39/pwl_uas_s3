@@ -80,7 +80,6 @@ $userData = mysqli_fetch_assoc($result);
                             <div class=" mt-5 text-center"><button class="btn btn-success profile-button" type="button" onclick="editing()">Edit Profile</button></div>
                         </div>
                         <div class="col-sm-6">
-                            <div class="mt-5 text-center"><button class="btn btn-info profile-button" type="button">Save Profile</button></div>
                         </div>
                     </div>
 
