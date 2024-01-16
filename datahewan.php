@@ -1,5 +1,22 @@
 <?php
 require('koneksi.php');
+include('navbar.php');
+
+$error = '';
+$success_message = '';
+$table_name ='hewan';
+
+$sql = 'CREATE TABLE IF NOT EXISTS `' . $table_name . '` (
+    `id` INT(11) NOT NULL AUTO_INCREMENT,
+    `nama` VARCHAR(255) NOT NULL,
+    `jenis` VARCHAR(255) NOT NULL,
+    `spesies` VARCHAR(255) NOT NULL,
+    `warna` VARCHAR(255) NOT NULL,
+    `umur` INT(11) NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1';
+
+$query = mysqli_query($db_conn, $sql);
 
 // Ambil data tiket dari database
 $sql = 'SELECT * FROM hewan';
@@ -61,7 +78,7 @@ if (mysqli_num_rows($result) > 0) {
 
             <form action="datahewan.php" method="get">
         <input type="text" name="cari" placeholder="Cari Nama & Id">
-        <input type="submit" value="Cari">
+        <input type="submit" value="Cari" class="btn-primary rounded">
     </form><br>
 
             <?php if ($no_data_message != '') { ?>
