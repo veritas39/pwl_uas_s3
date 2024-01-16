@@ -27,7 +27,7 @@ $userData = mysqli_fetch_assoc($result);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Edit Profile</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
@@ -66,24 +66,33 @@ $userData = mysqli_fetch_assoc($result);
             <div class="col-md-5 border-right">
                 <div class="p-3 py-5">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="text-right">Profile Settings</h4>
+                        <h4 class="text-right">Edit Profile</h4>
                     </div>
-                    <div class="row mt-2">
-                        <div class="col-md-6"><label class="labels">Name</label><br><?php echo $userData['name']; ?><br></div>
-                        <div class="col-md-6"><label class="labels">Username</label><br><?php echo $userData['username']; ?><br></div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-12"><label class="labels">Email ID</label><br><?php echo $userData['email']; ?><br></div>
-                    </div>
-                    <div class="row  px-4">
-                        <div class="col-sm-6">
-                            <div class=" mt-5 text-center"><button class="btn btn-success profile-button" type="button" onclick="editing()">Edit Profile</button></div>
+                    <form action="updateprofile.php" method="POST">
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                                <label class="labels">Name</label><br>
+                                <input type="text" class="form-control" name="name" value="<?php echo $userData['name']; ?>">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="labels">Username</label><br>
+                                <input type="text" class="form-control" name="username" value="<?php echo $userData['username']; ?>">
+                            </div>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="mt-5 text-center"><button class="btn btn-info profile-button" type="button">Save Profile</button></div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <label class="labels">Email ID</label><br>
+                                <input type="email" class="form-control" name="email" value="<?php echo $userData['email']; ?>">
+                            </div>
                         </div>
-                    </div>
-
+                        <div class="row  px-4">
+                            <div class="col-sm-6">
+                                <div class=" mt-5 text-center">
+                                    <button class="btn btn-success profile-button" type="submit">Save Profile</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
             <div class="col-md-4 mt-5">
@@ -93,10 +102,7 @@ $userData = mysqli_fetch_assoc($result);
             </div>
         </div>
     </div>
-    </div>
-    </div>
-    </tbody>
-    </table>
+
     <script>
         function menglogout() {
             window.location.href = 'logout.php';
@@ -104,14 +110,6 @@ $userData = mysqli_fetch_assoc($result);
 
         function lihattiket() {
             window.location.href = 'ticketsaya.php';
-        }
-        function editing(){
-            window.location.href = 'profileedit.php';
-        }
-    </script>
-    <script>
-        function redirectToPage() {
-            window.location.href = 'ticket.php';
         }
     </script>
 
