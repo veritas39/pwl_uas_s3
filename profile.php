@@ -102,7 +102,7 @@ $userData = mysqli_fetch_assoc($result);
         }
 
         function lihattiket() {
-            window.location.href = 'ticketsaya.php';
+            window.location.href = 'tiketsaya.php';
         }
         function editing(){
             window.location.href = 'profileedit.php';
