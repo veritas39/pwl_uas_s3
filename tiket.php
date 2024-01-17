@@ -1,5 +1,6 @@
 <?php
 require('koneksi.php');
+include('navbar.php');
 
 $error = '';
 $success_message = '';
@@ -51,12 +52,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="style.css"><br><br><br>
     <title>Form Tiket</title>
 </head>
 <body style="background-color: gray; color: black; font-family: 'Helvetica Neue', sans-serif; margin: 0; padding: 0; height: 100vh; overflow: hidden;">
 
-<section class="container-fluid mb-4">
+<section class="container-fluid mb-4 py-4">
     <section class="row justify-content-center">
         <section class="col-12 col-sm-6 col-md-4">
             <form class="form-container" action="tiket.php" method="POST">

@@ -19,6 +19,22 @@ if (!$result) {
 }
 
 $userData = mysqli_fetch_assoc($result);
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $name = mysqli_real_escape_string($db_conn, $_POST['name']);
+    $email = mysqli_real_escape_string($db_conn, $_POST['email']);
+
+    $updateQuery = "UPDATE users SET name='$name', email='$email' WHERE username='$username'";
+    $updateResult = mysqli_query($db_conn, $updateQuery);
+
+    if (!$updateResult) {
+        die('ERROR: ' . mysqli_error($db_conn));
+    }
+
+    // Redirect to profile page after successful update
+    header('Location: profileedit.php');
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +43,7 @@ $userData = mysqli_fetch_assoc($result);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Edit Profile</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
@@ -35,7 +51,6 @@ $userData = mysqli_fetch_assoc($result);
     <style>
         body {
             background: white;
-
         }
 
         .form-control:focus {
@@ -66,51 +81,49 @@ $userData = mysqli_fetch_assoc($result);
             <div class="col-md-5 border-right">
                 <div class="p-3 py-5">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="text-right">Profile Settings</h4>
+                        <h4 class="text-right">Edit Profile</h4>
                     </div>
-                    <div class="row mt-2">
-                        <div class="col-md-6"><label class="labels">Name</label><br><?php echo $userData['name']; ?><br></div>
-                        <div class="col-md-6"><label class="labels">Username</label><br><?php echo $userData['username']; ?><br></div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-12"><label class="labels">Email ID</label><br><?php echo $userData['email']; ?><br></div>
-                    </div>
-                    <div class="row  px-4">
-                        <div class="col-sm-6">
-                            <div class=" mt-5 text-center"><button class="btn btn-success profile-button" type="button" onclick="editing()">Edit Profile</button></div>
+                    <form action="profileedit.php" method="POST">
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                                <label class="labels">Name</label><br>
+                                <input type="text" class="form-control" name="name" value="<?php echo $userData['name']; ?>">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="labels">Username</label><br>
+                                <input type="text" class="form-control" name="username" value="<?php echo $userData['username']; ?>" readonly>
+                            </div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <label class="labels">Email ID</label><br>
+                                <input type="email" class="form-control" name="email" value="<?php echo $userData['email']; ?>">
+                            </div>
                         </div>
-                    </div>
-
+                        <div class="row  px-4">
+                            <div class="col-sm-6">
+                                <div class=" mt-5 text-center">
+                                    <button class="btn btn-success profile-button" type="submit">Save Profile</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
             <div class="col-md-4 mt-5">
                 <div class="p-1">
-                    <button type="button" class="btn btn-primary btn-lg btn-block" onclick="lihattiket()">Riwayat Pemesanan</button>
                 </div>
             </div>
         </div>
     </div>
-    </div>
-    </div>
-    </tbody>
-    </table>
+
     <script>
         function menglogout() {
             window.location.href = 'logout.php';
         }
 
         function lihattiket() {
-            window.location.href = 'tiketsaya.php';
-        }
-        function editing(){
-            window.location.href = 'profileedit.php';
-        }
-    </script>
-    <script>
-        function redirectToPage() {
-            window.location.href = 'ticket.php';
+            window.location.href = 'ticketsaya.php';
         }
     </script>
 

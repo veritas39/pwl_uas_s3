@@ -51,11 +51,22 @@ if( isset($_POST['submit']) ){
             if( cek_nama($name,$db_conn) == 0 ){
                 //hashing password sebelum disimpan di database
                 $pass = password_hash($password, PASSWORD_DEFAULT);
-
+$user_data = array(
+                    'username' => $username,
+                    'name' => $name,
+                    'email' => $email,
+                    'password' => $pass);
                 //insert data ke database
                 $query = "INSERT INTO users (username, name, email, password ) VALUES ('$username', '$name', '$email', '$pass')";
                 $result = mysqli_query($db_conn, $query);
+                $registered_data = file_get_contents('registered.json');
+                $registered_array = json_decode($registered_data, true);
 
+                // Menambahkan data baru
+                $registered_array[] = $user_data;
+
+                // Menyimpan kembali data ke registered.json
+                file_put_contents('registered.json', json_encode($registered_array, JSON_PRETTY_PRINT));
                 //jika insert data berhasil maka akan diredirect ke halaman index.php serta menyimpan data username ke session
                 if ($result) {
                     $_SESSION['username'] = $username;

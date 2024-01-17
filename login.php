@@ -116,7 +116,7 @@ if (isset($_POST['submit'])) {
                 <div class="form-footer mt-2">
                     <p> Belum punya akun? <a href="register.php">Register</a></p>
                 </div>
-            </form>
+              </form>
 
               </div>
             </div>

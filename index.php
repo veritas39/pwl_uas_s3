@@ -2,20 +2,19 @@
 require('koneksi.php');
 include('navbar.php');
 
-session_start();
+// session_start();
 
 if( !isset($_SESSION['username']) ){
     $_SESSION['msg'] = 'anda harus login untuk mengakses halaman ini';
     header('Location: login.php');
     $name = isset($_SESSION['name']) ? $_SESSION['name'] : '';
 }
+?>
 
-
-echo '
 
 <html>
 <head>
-    <title>Latihan SQL</title>
+    <title></title>
     <style>
         body {
             font-family: tahoma, arial;
@@ -34,17 +33,11 @@ echo '
             align-items: center;
 
         }
-
-        .logout-btn {
-            margin-left: auto; /* Ini akan membuat tombol logout berada di sebelah kanan */
-        }
-        
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
     </head>
 <body class="p-0 mx-0">
     <!--<nav class="p-4 d-flex  flex-row-reverse">
@@ -60,7 +53,7 @@ echo '
         <img src="images/2.jpg" class="img-fluid float-start mx-auto rounded-lg">
         </div>
         <div class="col-sm-6 py-5 px-5 ">
-            <h1>Welcome, <?php echo $_SESSION["$username"]; ?></h1>
+            <h1>Halo, <?php echo $_SESSION['username']; ?></h1>
                 <h1>Selamat Datang di Sistem Informasi Kebun Binatang Indonesia</h1>
                 <p>Temukan berbagai kabar terbaru kami disini</p>
                 <button type="button" onclick="redirectToPage()" class="btn btn-l mr-5 btn-outline-primary btn-lg btn-block">Rencanakan Kunjungan Anda</button></a>
@@ -154,11 +147,11 @@ echo '
     </a>
   </div>
   </div>
-    <tbody>';
-echo '
+    <tbody>;
+
     </tbody>
-</table>';
-?>
+</table>;
+
 
 <script>
     function menglogout() {

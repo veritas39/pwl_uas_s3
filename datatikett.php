@@ -4,21 +4,6 @@ include('navbar.php');
 
 // session_start();
 
-$error = '';
-$success_message = '';
-$table_name ='tiket';
-
-$sql = 'CREATE TABLE IF NOT EXISTS `' . $table_name . '` (
-    `id` INT(11) NOT NULL AUTO_INCREMENT,
-    `nama` VARCHAR(255) NOT NULL,
-    `jenis` VARCHAR(255) NOT NULL,
-    `spesies` VARCHAR(255) NOT NULL,
-    `warna` VARCHAR(255) NOT NULL,
-    `umur` INT(11) NOT NULL,
-    PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1';
-
-$query = mysqli_query($db_conn, $sql);
 
 // Ambil data tiket dari database
 $sql = 'SELECT * FROM tiket';
@@ -35,7 +20,6 @@ if (mysqli_num_rows($result) > 0) {
     // Tidak ada data tiket
     $no_data_message = 'Belum ada data tiket yang dimasukkan.';
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +28,7 @@ if (mysqli_num_rows($result) > 0) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
@@ -67,10 +51,6 @@ if (mysqli_num_rows($result) > 0) {
 
         .alert {
             margin-top: 20px;
-        }
-
-        .a {
-            text-align: center;
         }
 
         .pagination {
@@ -104,43 +84,42 @@ if (mysqli_num_rows($result) > 0) {
             color: white;
         }
     </style>
-    <title>Data tiket</title>
+    <title>Data Tiket</title>
 </head>
-<body>
-<section class="container-fluid mb-4">
+<body >
+
+<section class="container-fluid mb-4 py-4">
     <section class="row justify-content-center">
         <section class="">
-            <h4 class="text-center font-weight-bold mb-4 py-4"> Data tiket </h4>
+            <h4 class="text-center font-weight-bold mb-4"> Data Tiket </h4>
 
             <form action="datatiket.php" method="get">
-            <form id="searchForm">
-                <input type="text" name="cari" id="searchInput" placeholder=" Cari Nama & Id">
-            </form><br>
-            <div id="searchResults"></div>
+        <input type="text" name="cari" placeholder=" Cari Nama & Id" class="rounded">
+        <input type="submit" value="Cari" class="btn-primary rounded">
     </form><br>
 
             <?php if ($no_data_message != '') { ?>
                 <div class="alert alert-info" role="alert"><?= $no_data_message; ?></div>
             <?php } else { ?>
             
-    <table class="table table-hover d-none">
+                <table class="table table-hover">
     <thead>
         <tr>
             <th>ID</th>
             <th>Nama</th>
             <!-- <th>Email</th> -->
-            <th>Jenis</th>
-            <th>Spesies</th>
-            <th>Warna</th>
-            <th>Umur</th>
+            <th>Jumlah Tiket</th>
+            <th>Tanggal Pemesanan</th>
+            <th>Tanggal Kedatangan</th>
+            <th>Total Harga</th>
             <!-- ADMIN VIEW -->
             <?php if ($_SESSION['privilege'] == 'admin') { ?>
-            <th>Opsi</th>
+            <th>Aksi</th>
             <?php } ?>
         </tr>
     </thead>
     <tbody>
-        <?php
+        <?php 
         
         if (!$result) {
             die("Query failed: " . mysqli_error($db_conn));
@@ -152,7 +131,7 @@ if (mysqli_num_rows($result) > 0) {
 
         $query = "SELECT id, nama, email, jumlah_tiket, tgl_pemesanan, tgl_kedatangan, total_harga
         FROM tiket
-        WHERE Nama LIKE '%$cari%' OR id = '$cari'
+        WHERE nama LIKE '%$cari%' OR id = '$cari'
         LIMIT $mulai, $per_halaman";
 
 
@@ -162,14 +141,15 @@ if (mysqli_num_rows($result) > 0) {
             die("Query failed: " . mysqli_error($koneksi));
         }
         
-        foreach ($result as $tiket) { ?>
+        foreach ($tiket_data as $tiket) { ?>
             <tr>
                 <td><?= $tiket['id']; ?></td>
                 <td><?= $tiket['nama']; ?></td>
-                <td><?= $tiket['jenis']; ?></td>
-                <td><?= $tiket['spesies']; ?></td>
-                <td><?= $tiket['warna']; ?></td>
-                <td><?= $tiket['umur']; ?></td>
+                <!-- <td><?= $tiket['email']; ?></td>  -->
+                <td><?= $tiket['jumlah_tiket']; ?></td>
+                <td><?= $tiket['tgl_pemesanan']; ?></td>
+                <td><?= $tiket['tgl_kedatangan']; ?></td>
+                <td><?= $tiket['total_harga']; ?></td>
                 <!-- ADMIN VIEW -->
                 <?php if ($_SESSION['privilege'] == 'admin') { ?>
                 <td>
@@ -184,68 +164,36 @@ if (mysqli_num_rows($result) > 0) {
                 </td>
                 <?php } ?>
             </tr>
-            
-        <?php 
-        } ?>
+        <?php } ?>
     </tbody>
-    
-    </table>
-
-<a href="index.php" class="btn btn-primary">Kembali</a>
-<!-- ADMIN VIEW -->
-<?php if ($_SESSION['privilege'] == 'admin') { ?>
-<a href="tiket.php" class="btn btn-primary">Tambah tiket</a><br><br>
-<?php } ?>
-<br>
-<?php 
-$query_jumlah = "SELECT COUNT(*) AS total_tiket FROM tiket WHERE Nama LIKE '%$cari%' OR id = '$cari'";
-$result_jumlah = mysqli_query($db_conn, $query_jumlah);
-
-if (!$result_jumlah) {
-    die("Query failed: " . mysqli_error($db_conn));
-}
-
-$row_jumlah = mysqli_fetch_assoc($result_jumlah);
-$total_tiket = $row_jumlah['total_tiket'];
-$total_halaman = ceil($total_tiket / $per_halaman);
-
-// echo "Total: " . $total_tiket;
-
-// echo "<ul class='pagination'>";
-// for ($i = 1; $i <= $total_halaman; $i++) {
-//     echo "<li><a href='datatiket.php?halaman=$i'>$i</a></li>";
-// }
-// echo "</ul>";
-} ?>
-        </section>
+</table>
+<a href="index.php" class="btn btn-primary">Kembali</a><br>
+            <?php 
+        $query_jumlah = "SELECT COUNT(*) AS total_tiket FROM tiket WHERE nama LIKE '%$cari%' OR id = '$cari'";
+        $result_jumlah = mysqli_query($db_conn, $query_jumlah);
         
+        if (!$result_jumlah) {
+            die("Query failed: " . mysqli_error($db_conn));
+        }
+        
+        $row_jumlah = mysqli_fetch_assoc($result_jumlah);
+        $total_tiket = $row_jumlah['total_tiket'];
+        $total_halaman = ceil($total_tiket / $per_halaman);
+        
+        echo "Total: " . $total_tiket;
+        
+        echo "<ul class='pagination'>";
+        for ($i = 1; $i <= $total_halaman; $i++) {
+            echo "<li><a href='datatiket.php?halaman=$i'>$i</a></li>";
+        }
+        echo "</ul>";} ?>
+        </section>
     </section>
 </section>
-<!-- 
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965Dz00rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/18WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ60W/JmZQ5stwEULTy" crossorigin="anonymous"></script> -->
-<script>
-    $(document).ready(function () {
-        // Execute search on keyup event
-        $("#searchInput").keyup(function () {
-            search();
-        });
-        search();
-    });
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ60W/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
-    function search() {
-        var searchTerm = $("#searchInput").val();
-
-        $.ajax({
-            type: "GET",
-            url: "ajax_search_tiket.php",
-            data: { cari: searchTerm },
-            success: function (response) {
-                $("#searchResults").html(response);
-            }
-        });
-    }
-</script>
 </body>
 </html>

@@ -6,7 +6,7 @@ include('navbar.php');
 
 $error = '';
 $success_message = '';
-$table_name ='tiket';
+$table_name ='hewan';
 
 $sql = 'CREATE TABLE IF NOT EXISTS `' . $table_name . '` (
     `id` INT(11) NOT NULL AUTO_INCREMENT,
@@ -21,7 +21,7 @@ $sql = 'CREATE TABLE IF NOT EXISTS `' . $table_name . '` (
 $query = mysqli_query($db_conn, $sql);
 
 // Ambil data tiket dari database
-$sql = 'SELECT * FROM tiket';
+$sql = 'SELECT * FROM hewan';
 $result = mysqli_query($db_conn, $sql);
 
 // Inisialisasi variabel untuk menampilkan pesan jika tidak ada data
@@ -30,7 +30,7 @@ $no_data_message = '';
 // Cek apakah ada data tiket
 if (mysqli_num_rows($result) > 0) {
     // Data tiket ditemukan
-    $tiket_data = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    $hewan_data = mysqli_fetch_all($result, MYSQLI_ASSOC);
 } else {
     // Tidak ada data tiket
     $no_data_message = 'Belum ada data tiket yang dimasukkan.';
@@ -44,7 +44,7 @@ if (mysqli_num_rows($result) > 0) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
@@ -104,26 +104,24 @@ if (mysqli_num_rows($result) > 0) {
             color: white;
         }
     </style>
-    <title>Data tiket</title>
+    <title>Data Hewan</title>
 </head>
 <body>
 <section class="container-fluid mb-4">
     <section class="row justify-content-center">
         <section class="">
-            <h4 class="text-center font-weight-bold mb-4 py-4"> Data tiket </h4>
+            <h4 class="text-center font-weight-bold mb-4 py-4"> Data Hewan </h4>
 
-            <form action="datatiket.php" method="get">
-            <form id="searchForm">
-                <input type="text" name="cari" id="searchInput" placeholder=" Cari Nama & Id">
-            </form><br>
-            <div id="searchResults"></div>
+            <form action="datahewan.php" method="get">
+        <input type="text" name="cari" placeholder="Cari Nama & Id">
+        <input type="submit" value="Cari" class="btn-primary rounded">
     </form><br>
 
             <?php if ($no_data_message != '') { ?>
                 <div class="alert alert-info" role="alert"><?= $no_data_message; ?></div>
             <?php } else { ?>
             
-    <table class="table table-hover d-none">
+    <table class="table table-hover">
     <thead>
         <tr>
             <th>ID</th>
@@ -150,8 +148,8 @@ if (mysqli_num_rows($result) > 0) {
         $mulai = ($halaman - 1) * $per_halaman;
         $cari = isset($_GET['cari']) ? $_GET['cari'] : '';
 
-        $query = "SELECT id, nama, email, jumlah_tiket, tgl_pemesanan, tgl_kedatangan, total_harga
-        FROM tiket
+        $query = "SELECT id, nama, jenis, spesies, warna, umur
+        FROM hewan
         WHERE Nama LIKE '%$cari%' OR id = '$cari'
         LIMIT $mulai, $per_halaman";
 
@@ -162,31 +160,31 @@ if (mysqli_num_rows($result) > 0) {
             die("Query failed: " . mysqli_error($koneksi));
         }
         
-        foreach ($result as $tiket) { ?>
+        foreach ($result as $hewan) { ?>
             <tr>
-                <td><?= $tiket['id']; ?></td>
-                <td><?= $tiket['nama']; ?></td>
-                <td><?= $tiket['jenis']; ?></td>
-                <td><?= $tiket['spesies']; ?></td>
-                <td><?= $tiket['warna']; ?></td>
-                <td><?= $tiket['umur']; ?></td>
+                <td><?= $hewan['id']; ?></td>
+                <td><?= $hewan['nama']; ?></td>
+                <td><?= $hewan['jenis']; ?></td>
+                <td><?= $hewan['spesies']; ?></td>
+                <td><?= $hewan['warna']; ?></td>
+                <td><?= $hewan['umur']; ?></td>
                 <!-- ADMIN VIEW -->
                 <?php if ($_SESSION['privilege'] == 'admin') { ?>
                 <td>
                     <!-- Tombol/Tautan Detail -->
-                    <a href="detail.php?id=<?= $tiket['id']; ?>" class="btn btn-info btn-sm">Detail</a>
+                    <a href="detailhewan.php?id=<?= $hewan['id']; ?>" class="btn btn-info btn-sm">Detail</a>
                     
                     <!-- Tombol/Tautan Edit -->
-                    <a href="edit.php?id=<?= $tiket['id']; ?>" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="edithewan.php?id=<?= $hewan['id']; ?>" class="btn btn-warning btn-sm">Edit</a>
                     
                     <!-- Tombol/Tautan Hapus -->
-                    <a href="hapus.php?id=<?= $tiket['id']; ?>" class="btn btn-danger btn-sm">Hapus</a>
+                    <a href="hapushewan.php?id=<?= $hewan['id']; ?>" class="btn btn-danger btn-sm">Hapus</a>
                 </td>
                 <?php } ?>
             </tr>
             
         <?php 
-        } ?>
+    } ?>
     </tbody>
     
     </table>
@@ -194,11 +192,11 @@ if (mysqli_num_rows($result) > 0) {
 <a href="index.php" class="btn btn-primary">Kembali</a>
 <!-- ADMIN VIEW -->
 <?php if ($_SESSION['privilege'] == 'admin') { ?>
-<a href="tiket.php" class="btn btn-primary">Tambah tiket</a><br><br>
+<a href="hewan.php" class="btn btn-primary">Tambah hewan</a><br><br>
 <?php } ?>
 <br>
 <?php 
-$query_jumlah = "SELECT COUNT(*) AS total_tiket FROM tiket WHERE Nama LIKE '%$cari%' OR id = '$cari'";
+$query_jumlah = "SELECT COUNT(*) AS total_hewan FROM hewan WHERE Nama LIKE '%$cari%' OR id = '$cari'";
 $result_jumlah = mysqli_query($db_conn, $query_jumlah);
 
 if (!$result_jumlah) {
@@ -206,17 +204,16 @@ if (!$result_jumlah) {
 }
 
 $row_jumlah = mysqli_fetch_assoc($result_jumlah);
-$total_tiket = $row_jumlah['total_tiket'];
-$total_halaman = ceil($total_tiket / $per_halaman);
+$total_hewan = $row_jumlah['total_hewan'];
+$total_halaman = ceil($total_hewan / $per_halaman);
 
-// echo "Total: " . $total_tiket;
+echo "Total: " . $total_hewan;
 
-// echo "<ul class='pagination'>";
-// for ($i = 1; $i <= $total_halaman; $i++) {
-//     echo "<li><a href='datatiket.php?halaman=$i'>$i</a></li>";
-// }
-// echo "</ul>";
-} ?>
+echo "<ul class='pagination'>";
+for ($i = 1; $i <= $total_halaman; $i++) {
+    echo "<li><a href='datahewan.php?halaman=$i'>$i</a></li>";
+}
+echo "</ul>";} ?>
         </section>
         
     </section>
@@ -225,27 +222,6 @@ $total_halaman = ceil($total_tiket / $per_halaman);
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965Dz00rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/18WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ60W/JmZQ5stwEULTy" crossorigin="anonymous"></script> -->
-<script>
-    $(document).ready(function () {
-        // Execute search on keyup event
-        $("#searchInput").keyup(function () {
-            search();
-        });
-        search();
-    });
 
-    function search() {
-        var searchTerm = $("#searchInput").val();
-
-        $.ajax({
-            type: "GET",
-            url: "ajax_search_tiket.php",
-            data: { cari: searchTerm },
-            success: function (response) {
-                $("#searchResults").html(response);
-            }
-        });
-    }
-</script>
 </body>
 </html>
