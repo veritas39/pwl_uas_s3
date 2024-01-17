@@ -34,15 +34,58 @@ if (mysqli_num_rows($result) > 0) {
     $no_data_message = 'Belum ada data tiket yang dimasukkan.';
 }
 
+// Mengolah permintaan AJAX untuk pencarian
+if (isset($_GET['q'])) {
+    $cari = $_GET['q'];
+
+    $query = "SELECT id, nama, jenis, spesies, warna, umur
+              FROM hewan
+              WHERE Nama LIKE '%$cari%' OR id = '$cari'";
+
+    $result = mysqli_query($db_conn, $query);
+
+    if (!$result) {
+        die("Query failed: " . mysqli_error($db_conn));
+    }
+
+    // Membuat daftar hasil pencarian
+    $response = "";
+    foreach ($result as $hewan) {
+        $response .= "<p>ID: " . $hewan['id'] . ", Nama: " . $hewan['nama'] . ", Jenis: " . $hewan['jenis'] . "</p>";
+    }
+
+    // Mengirimkan hasil ke client
+    echo $response;
+    exit(); // Berhenti untuk mencegah output tambahan
+}
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+        function showHint(str) {
+            if (str.length == 0) {
+                document.getElementById("txtHint").innerHTML = "";
+                return;
+            } else {
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("txtHint").innerHTML = this.responseText;
+                    }
+                }
+                xmlhttp.open("GET", "datahewan.php?q=" + str, true);
+                xmlhttp.send();
+            }
+        }
+    </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
+        
         body {
             background-color: #f8f9fa;
         }
@@ -76,10 +119,16 @@ if (mysqli_num_rows($result) > 0) {
         <section class="">
             <h4 class="text-center font-weight-bold mb-4"> Data Hewan </h4>
 
-            <form action="datahewan.php" method="get">
+            <!-- <form action="datahewan.php" method="get">
         <input type="text" name="cari" placeholder="Cari Nama & Id">
         <input type="submit" value="Cari" class="btn-primary rounded">
-    </form><br>
+    </form><br> -->
+    <form action="datahewan.php" method="get">
+    <label for="cari">Cari Nama & ID:</label>
+    <input type="text" id="cari" name="cari" placeholder="Cari Nama & ID" onkeyup="showHint(this.value)">
+    <input type="submit" value="Cari">
+</form><br>
+<p>Suggestions: <span id="txtHint"></span></p>
 
             <?php if ($no_data_message != '') { ?>
                 <div class="alert alert-info" role="alert"><?= $no_data_message; ?></div>
@@ -148,7 +197,7 @@ if (mysqli_num_rows($result) > 0) {
     
 </table>
 
-<a href="index.php" class="btn btn-primary">Kembali</a> <a href="hewan.php" class="btn btn-primary">Tambah hewan</a><br><br>
+<a href="index.php" class="btn btn-primary">Kembali</a> <a href="hewan.php" class="btn btn-primary">Tambah hewan</a> <a href="create_json.php" class="btn btn-primary">Export Data to Json</a><br><br><br><br>
             <?php 
 $query_jumlah = "SELECT COUNT(*) AS total_hewan FROM hewan WHERE Nama LIKE '%$cari%' OR id = '$cari'";
 $result_jumlah = mysqli_query($db_conn, $query_jumlah);
