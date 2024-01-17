@@ -112,7 +112,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <div class="col-md-4 mt-5">
                 <div class="p-1">
-                    <button type="button" class="btn btn-primary btn-lg btn-block" onclick="lihattiket()">Riwayat Pemesanan</button>
                 </div>
             </div>
         </div>
